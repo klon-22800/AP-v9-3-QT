@@ -3,7 +3,6 @@ import csv
 import shutil
 
 
-
 def rename(new_folder_name: str) -> None:
     for i in range(1, 6):
         relative_path = os.path.relpath(f'{new_folder_name}')

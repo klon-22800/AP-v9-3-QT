@@ -4,11 +4,12 @@ import libs.task_1
 import libs.task_2
 import libs.task_3
 
-from PyQt5.QtWidgets import (QWidget, QLabel,
-    QComboBox, QApplication, QMainWindow, QPushButton, QToolTip, QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog)
-from  PyQt5 import QtWidgets
-from PyQt5.QtGui import QFont, QIcon
-from libs.design import Ui_Dialog
+from libs.task_5 import Iterator
+
+from PyQt5.QtWidgets import (QWidget, QLabel, QApplication, QPushButton,
+                             QToolTip, QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog)
+from PyQt5.QtGui import (QFont, QIcon, QPixmap)
+
 
 class ScrollLabel(QScrollArea):
     def __init__(self, *args, **kwargs):
@@ -22,8 +23,9 @@ class ScrollLabel(QScrollArea):
         lay.addWidget(self.label)
         self.label.setFont(QFont("SansSerif", 15))
 
-    def setText(self, text):
+    def setText(self, text:str)-> None:
         self.label.setText(text)
+
 
 class Window(QWidget):
 
@@ -42,39 +44,57 @@ class Window(QWidget):
 
         self.button_create_csv = QPushButton('Create CSV-Dataset', self)
         self.button_create_csv.adjustSize()
-        self.button_create_csv.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 300px; min-height: 200px;")
+        self.button_create_csv.setFont(QFont('Arial', 15))
+        self.button_create_csv.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 300px; min-height: 200px;")
         self.button_create_csv.clicked.connect(self.choice_1)
 
         self.button_dataset = QPushButton('Create Dataset2', self)
         self.button_dataset.adjustSize()
+        self.button_dataset.setFont(QFont('Arial', 15))
         self.button_dataset.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 300px; min-height: 200px;")
         self.button_dataset.clicked.connect(self.choice_2)
 
         self.button_dataset2 = QPushButton('Create Dataset-Random', self)
         self.button_dataset2.adjustSize()
+        self.button_dataset2.setFont(QFont('Arial', 15))
         self.button_dataset2.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 300px; min-height: 200px;")
         self.button_dataset2.clicked.connect(self.choice_3)
 
+        self.logo = QPixmap("logo.png").scaled(300, 90)
+        self.logo_label = QLabel()
+        self.logo_label.setPixmap(self.logo)
+
         self.button_rating1 = QPushButton('1', self)
-        self.button_rating1.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
+        self.button_rating1.setFont(QFont("Arial", 15))
+        self.button_rating1.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
         self.button_rating1.clicked.connect(self.next_1)
-        
+
         self.button_rating2 = QPushButton('2', self)
-        self.button_rating2.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
+        self.button_rating2.setFont(QFont("Arial", 15))
+        self.button_rating2.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
         self.button_rating2.clicked.connect(self.next_2)
-        
+
         self.button_rating3 = QPushButton('3', self)
-        self.button_rating3.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
+        self.button_rating3.setFont(QFont("Arial", 15))
+        self.button_rating3.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
         self.button_rating3.clicked.connect(self.next_3)
-        
+
         self.button_rating4 = QPushButton('4', self)
-        self.button_rating4.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
+        self.button_rating4.setFont(QFont("Arial", 15))
+        self.button_rating4.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
         self.button_rating4.clicked.connect(self.next_4)
-        
+
         self.button_rating5 = QPushButton('5', self)
-        self.button_rating5.setStyleSheet("background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
+        self.button_rating5.setFont(QFont("Arial", 15))
+        self.button_rating5.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
         self.button_rating5.clicked.connect(self.next_5)
 
         self.review = ScrollLabel(self)
@@ -87,6 +107,7 @@ class Window(QWidget):
         layout.addWidget(self.button_dataset, 1, 0, 1, 1)
         layout.addWidget(self.button_dataset2, 2, 0)
         layout.addWidget(self.review, 0, 1, 3, 5)
+        layout.addWidget(self.logo_label, 3, 0, 1, 1)
 
         layout.addWidget(self.button_rating1, 3, 1)
         layout.addWidget(self.button_rating2, 3, 2)
@@ -94,7 +115,7 @@ class Window(QWidget):
         layout.addWidget(self.button_rating4, 3, 4)
         layout.addWidget(self.button_rating5, 3, 5)
 
-        self.show()   
+        self.show()
 
     def choice_1(self):
         dialog = QDialog(self)
@@ -105,8 +126,9 @@ class Window(QWidget):
         self.folderpath = ''
         self.path_line_edit = QLineEdit(dialog)
         self.path_line_edit.setEnabled(False)
-        self.path_line_edit.setTextMargins(10,10,10,10)
-        self.path_line_edit.setStyleSheet("background:#d9d4e7; border-radius: 5px; color: #0e172c;")
+        self.path_line_edit.setTextMargins(10, 10, 10, 10)
+        self.path_line_edit.setStyleSheet(
+            "background:#d9d4e7; border-radius: 5px; color: #0e172c;")
 
         browse_button = QPushButton("Browse", dialog)
         browse_button.clicked.connect(self.select_folder)
@@ -117,7 +139,6 @@ class Window(QWidget):
         create_button.setStyleSheet("background:#3C5A75; border-radius: 5px;")
         create_button.clicked.connect(self.create_csv)
         create_button.adjustSize()
-
 
         layout = QVBoxLayout()
         layout.addWidget(path_label)
@@ -139,13 +160,15 @@ class Window(QWidget):
 
         self.old_path_line_edit = QLineEdit(dialog)
         self.old_path_line_edit.setEnabled(False)
-        self.old_path_line_edit.setTextMargins(10,10,10,10)
-        self.old_path_line_edit.setStyleSheet("background:#d9d4e7; border-radius: 5px; color: #0e172c;")
+        self.old_path_line_edit.setTextMargins(10, 10, 10, 10)
+        self.old_path_line_edit.setStyleSheet(
+            "background:#d9d4e7; border-radius: 5px; color: #0e172c;")
 
         self.new_path_line_edit = QLineEdit(dialog)
         self.new_path_line_edit.setEnabled(False)
-        self.new_path_line_edit.setTextMargins(10,10,10,10)
-        self.new_path_line_edit.setStyleSheet("background:#d9d4e7; border-radius: 5px; color: #0e172c;")
+        self.new_path_line_edit.setTextMargins(10, 10, 10, 10)
+        self.new_path_line_edit.setStyleSheet(
+            "background:#d9d4e7; border-radius: 5px; color: #0e172c;")
 
         browse_button = QPushButton("Browse", dialog)
         browse_button.clicked.connect(self.select_old_folder)
@@ -154,7 +177,8 @@ class Window(QWidget):
 
         browse_button_2 = QPushButton("Browse2", dialog)
         browse_button_2.clicked.connect(self.select_new_folder)
-        browse_button_2.setStyleSheet("background:#3C5A75; border-radius: 5px;")
+        browse_button_2.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px;")
         browse_button_2.adjustSize()
 
         create_button = QPushButton("Make new dataset", dialog)
@@ -164,7 +188,6 @@ class Window(QWidget):
         else:
             create_button.clicked.connect(self.create_dataset_random)
         create_button.adjustSize()
-
 
         layout = QVBoxLayout()
         layout.addWidget(path_label)
@@ -177,7 +200,6 @@ class Window(QWidget):
 
         dialog.exec_()
 
-
     def choice_2(self):
         self.mode = 2
         self.double_choice()
@@ -186,23 +208,31 @@ class Window(QWidget):
         self.mode = 3
         self.double_choice()
 
-    
     def select_folder(self):
-        self.folderpath = (QFileDialog.getExistingDirectory(self, 'Select Folder')).replace('/', '\\')
+        self.folderpath = (QFileDialog.getExistingDirectory(
+            self, 'Select Folder')).replace('/', '\\')
+        self.iter1 = libs.task_5.Iterator(self.folderpath, '1')
+        self.iter2 = libs.task_5.Iterator(self.folderpath, '2')
+        self.iter3 = libs.task_5.Iterator(self.folderpath, '3')
+        self.iter4 = libs.task_5.Iterator(self.folderpath, '4')
+        self.iter5 = libs.task_5.Iterator(self.folderpath, '5')
+
         self.path_line_edit.setText(self.folderpath)
 
     def select_old_folder(self):
-        self.old_folderpath = (QFileDialog.getExistingDirectory(self, 'Select Folder')).replace('/', '\\')
+        self.old_folderpath = (QFileDialog.getExistingDirectory(
+            self, 'Select Folder')).replace('/', '\\')
         self.old_path_line_edit.setText(self.old_folderpath)
 
     def select_new_folder(self):
-        self.new_folderpath = (QFileDialog.getExistingDirectory(self, 'Select Folder')).replace('/', '\\')
+        self.new_folderpath = (QFileDialog.getExistingDirectory(
+            self, 'Select Folder')).replace('/', '\\')
         self.new_path_line_edit.setText(self.new_folderpath)
 
     def create_csv(self):
         path = self.folderpath.split('\\')[-1]
         libs.task_1.make_csv(path)
-            
+
     def create_dataset2(self):
         old_path = self.old_folderpath.split('\\')[-1]
         new_path = self.new_folderpath.split('\\')[-1]
@@ -216,18 +246,41 @@ class Window(QWidget):
         libs.task_3.main(old_path, new_path)
 
     def next_1(self):
-        print(1)
-    def next_2(self):
-        print(1)
-    def next_3(self):
-        print(1)
-    def next_4(self):
-        print(1)
-    def next_5(self):
-        print(1)
-                 
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except AttributeError:
+            print('Problem')
 
-        
+    def next_2(self):
+        try:
+            with open(next(self.iter2), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except AttributeError:
+            print('Problem')
+
+    def next_3(self):
+        try:
+            with open(next(self.iter3), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except AttributeError:
+            print('Problem')
+
+    def next_4(self):
+        try:
+            with open(next(self.iter4), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except AttributeError:
+            print('Problem')
+
+    def next_5(self):
+        try:
+            with open(next(self.iter5), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except AttributeError:
+            print('Problem')
+
+
 def start():
     app = QApplication(sys.argv)
     ex = Window()

@@ -4,7 +4,6 @@ import csv
 import random
 
 
-
 def rename(new_folder_name: str) -> dict:
     random_numbers = random.sample(range(0, 10001), 5000)
     count = 0
