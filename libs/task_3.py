@@ -5,6 +5,10 @@ import random
 
 
 def rename(new_folder_name: str) -> dict:
+    """
+    The function renames files and changes the hierarchy, 
+    returns a dictionary in the format: key - file path, value - class label
+    """
     random_numbers = random.sample(range(0, 10001), 5000)
     count = 0
     class_nums = {}
@@ -33,6 +37,9 @@ def rename(new_folder_name: str) -> dict:
 
 
 def move_dataset(old_folder_name: str, new_folder_name: str) -> None:
+    """
+    The function copies files to a new directory
+    """
     old_path = os.path.relpath(f'{old_folder_name}')
     new_path = os.path.relpath(f'{new_folder_name}')
     if os.path.isdir(new_path):
@@ -41,6 +48,9 @@ def move_dataset(old_folder_name: str, new_folder_name: str) -> None:
 
 
 def make_csv_random(new_folder_name: str, class_number: dict) -> None:
+    """
+    The function writes data to a csv file in the following format: absolute path, relative path, class label
+    """
     work_catalog = os.getcwd()
     os.chdir(new_folder_name)
     names = os.listdir()

@@ -11,6 +11,9 @@ class Iterator:
         self.limit = len(self.data)
 
     def __next__(self):
+        """
+        The function returns the next element path by class label
+        """
         if self.counter < self.limit:
             path = os.path.join(self.path, self.data[self.counter])
             self.counter += 1

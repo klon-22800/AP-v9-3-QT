@@ -4,11 +4,10 @@ import libs.task_1
 import libs.task_2
 import libs.task_3
 
-from libs.task_5 import Iterator
-
-from PyQt5.QtWidgets import (QWidget, QLabel, QApplication, QPushButton,
-                             QToolTip, QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog)
+from PyQt5.QtWidgets import (QWidget, QLabel, QApplication, QPushButton, QToolTip,
+                             QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog)
 from PyQt5.QtGui import (QFont, QIcon, QPixmap)
+from libs.task_5 import Iterator
 
 
 class ScrollLabel(QScrollArea):
@@ -23,7 +22,10 @@ class ScrollLabel(QScrollArea):
         lay.addWidget(self.label)
         self.label.setFont(QFont("SansSerif", 15))
 
-    def setText(self, text:str)-> None:
+    def setText(self, text: str) -> None:
+        """
+        The function sets the text field for the scrolllabel
+        """
         self.label.setText(text)
 
 
@@ -35,7 +37,10 @@ class Window(QWidget):
         self.setStyleSheet(
             "background:#061E33; color: #C3D0DB; font-weight:bold; border-radius: 5px;")
 
-    def initUI(self):
+    def initUI(self) -> None:
+        """
+        The function creates UI objects
+        """
         self.mode = 2
 
         self.setWindowTitle('Dataset maker')
@@ -67,35 +72,35 @@ class Window(QWidget):
         self.logo_label = QLabel()
         self.logo_label.setPixmap(self.logo)
 
-        self.button_rating1 = QPushButton('1', self)
-        self.button_rating1.setFont(QFont("Arial", 15))
-        self.button_rating1.setStyleSheet(
+        self.button_class_1 = QPushButton('1', self)
+        self.button_class_1.setFont(QFont("Arial", 15))
+        self.button_class_1.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
-        self.button_rating1.clicked.connect(self.next_1)
+        self.button_class_1.clicked.connect(self.next_1)
 
-        self.button_rating2 = QPushButton('2', self)
-        self.button_rating2.setFont(QFont("Arial", 15))
-        self.button_rating2.setStyleSheet(
+        self.button_class_2 = QPushButton('2', self)
+        self.button_class_2.setFont(QFont("Arial", 15))
+        self.button_class_2.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
-        self.button_rating2.clicked.connect(self.next_2)
+        self.button_class_2.clicked.connect(self.next_2)
 
-        self.button_rating3 = QPushButton('3', self)
-        self.button_rating3.setFont(QFont("Arial", 15))
-        self.button_rating3.setStyleSheet(
+        self.button_class_3 = QPushButton('3', self)
+        self.button_class_3.setFont(QFont("Arial", 15))
+        self.button_class_3.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
-        self.button_rating3.clicked.connect(self.next_3)
+        self.button_class_3.clicked.connect(self.next_3)
 
-        self.button_rating4 = QPushButton('4', self)
-        self.button_rating4.setFont(QFont("Arial", 15))
-        self.button_rating4.setStyleSheet(
+        self.button_class_4 = QPushButton('4', self)
+        self.button_class_4.setFont(QFont("Arial", 15))
+        self.button_class_4.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
-        self.button_rating4.clicked.connect(self.next_4)
+        self.button_class_4.clicked.connect(self.next_4)
 
-        self.button_rating5 = QPushButton('5', self)
-        self.button_rating5.setFont(QFont("Arial", 15))
-        self.button_rating5.setStyleSheet(
+        self.button_class_5 = QPushButton('5', self)
+        self.button_class_5.setFont(QFont("Arial", 15))
+        self.button_class_5.setStyleSheet(
             "background:#3C5A75; border-radius: 5px; min-width: 150px; min-height: 70px;")
-        self.button_rating5.clicked.connect(self.next_5)
+        self.button_class_5.clicked.connect(self.next_5)
 
         self.review = ScrollLabel(self)
         self.review.setStyleSheet("background:#d9d4e7; color: #3C5A75; ")
@@ -103,40 +108,47 @@ class Window(QWidget):
         layout = QGridLayout()
         self.setLayout(layout)
 
-        layout.addWidget(self.button_create_csv, 0, 0, )
+        layout.addWidget(self.button_create_csv, 0, 0)
         layout.addWidget(self.button_dataset, 1, 0, 1, 1)
         layout.addWidget(self.button_dataset2, 2, 0)
         layout.addWidget(self.review, 0, 1, 3, 5)
         layout.addWidget(self.logo_label, 3, 0, 1, 1)
 
-        layout.addWidget(self.button_rating1, 3, 1)
-        layout.addWidget(self.button_rating2, 3, 2)
-        layout.addWidget(self.button_rating3, 3, 3)
-        layout.addWidget(self.button_rating4, 3, 4)
-        layout.addWidget(self.button_rating5, 3, 5)
+        layout.addWidget(self.button_class_1, 3, 1)
+        layout.addWidget(self.button_class_2, 3, 2)
+        layout.addWidget(self.button_class_3, 3, 3)
+        layout.addWidget(self.button_class_4, 3, 4)
+        layout.addWidget(self.button_class_5, 3, 5)
 
         self.show()
 
-    def choice_1(self):
+    def choice_1(self) -> None:
+        """
+        The function opens a dialog box for creating a csv file of the initial dataset
+        """
         dialog = QDialog(self)
         dialog.setWindowTitle('Create file CSV')
-        dialog.setFixedSize(400, 200)
+        dialog.setFixedSize(500, 200)
         path_label = QLabel("Choose path:", dialog)
-        path_label.setStyleSheet('color: #C3D0DB')
+        path_label.setStyleSheet('color: #C3D0DB; min-height:30%')
         self.folderpath = ''
         self.path_line_edit = QLineEdit(dialog)
         self.path_line_edit.setEnabled(False)
         self.path_line_edit.setTextMargins(10, 10, 10, 10)
         self.path_line_edit.setStyleSheet(
-            "background:#d9d4e7; border-radius: 5px; color: #0e172c;")
+            "background:#d9d4e7; border-radius: 5px; color: #0e172c; min-height:30%")
 
-        browse_button = QPushButton("Browse", dialog)
+        browse_button = QPushButton("Browse source directory", dialog)
+        browse_button.setFont(QFont("Sanserif", 10))
         browse_button.clicked.connect(self.select_folder)
-        browse_button.setStyleSheet("background:#3C5A75; border-radius: 5px;")
+        browse_button.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-height:30%")
         browse_button.adjustSize()
 
         create_button = QPushButton("Сreate CSV", dialog)
-        create_button.setStyleSheet("background:#3C5A75; border-radius: 5px;")
+        create_button.setFont(QFont("Sanserif", 10))
+        create_button.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px;min-height:30%")
         create_button.clicked.connect(self.create_csv)
         create_button.adjustSize()
 
@@ -149,12 +161,15 @@ class Window(QWidget):
 
         dialog.exec_()
 
-    def double_choice(self):
+    def double_choice(self) -> None:
+        """
+        The function opens a dialog box for creating copies of the dataset and csv files for them
+        """
         dialog = QDialog(self)
         dialog.setWindowTitle('Create file CSV')
         dialog.setFixedSize(500, 300)
         path_label = QLabel("Choose path:", dialog)
-        path_label.setStyleSheet('color: #C3D0DB')
+        path_label.setStyleSheet('color: #C3D0DB; min-height:30%')
         self.old_folderpath = ''
         self.new_folderpath = ''
 
@@ -170,21 +185,26 @@ class Window(QWidget):
         self.new_path_line_edit.setStyleSheet(
             "background:#d9d4e7; border-radius: 5px; color: #0e172c;")
 
-        browse_button = QPushButton("Browse", dialog)
+        browse_button = QPushButton("Browse source directory", dialog)
+        browse_button.setFont(QFont("Sanserif", 10))
         browse_button.clicked.connect(self.select_old_folder)
-        browse_button.setStyleSheet("background:#3C5A75; border-radius: 5px;")
+        browse_button.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-height:30%")
         browse_button.adjustSize()
 
-        browse_button_2 = QPushButton("Browse2", dialog)
+        browse_button_2 = QPushButton("Browse destination directory ", dialog)
+        browse_button_2.setFont(QFont("Sanserif", 10))
         browse_button_2.clicked.connect(self.select_new_folder)
         browse_button_2.setStyleSheet(
-            "background:#3C5A75; border-radius: 5px;")
+            "background:#3C5A75; border-radius: 5px; min-height:30%")
         browse_button_2.adjustSize()
 
         create_button = QPushButton("Make new dataset", dialog)
-        create_button.setStyleSheet("background:#3C5A75; border-radius: 5px;")
+        create_button.setFont(QFont("Sanserif", 10))
+        create_button.setStyleSheet(
+            "background:#3C5A75; border-radius: 5px; min-height:30%")
         if self.mode == 2:
-            create_button.clicked.connect(self.create_dataset2)
+            create_button.clicked.connect(self.create_dataset_2)
         else:
             create_button.clicked.connect(self.create_dataset_random)
         create_button.adjustSize()
@@ -200,15 +220,24 @@ class Window(QWidget):
 
         dialog.exec_()
 
-    def choice_2(self):
+    def choice_2(self) -> None:
+        """
+        The function changes the mode in which the dialog box will launch
+        """
         self.mode = 2
         self.double_choice()
 
-    def choice_3(self):
+    def choice_3(self) -> None:
+        """
+        The function changes the mode in which the dialog box will launch
+        """
         self.mode = 3
         self.double_choice()
 
-    def select_folder(self):
+    def select_folder(self) -> None:
+        """
+        The function gets the path to the source dataset and creates iterators for each class
+        """
         self.folderpath = (QFileDialog.getExistingDirectory(
             self, 'Select Folder')).replace('/', '\\')
         self.iter1 = libs.task_5.Iterator(self.folderpath, '1')
@@ -219,69 +248,74 @@ class Window(QWidget):
 
         self.path_line_edit.setText(self.folderpath)
 
-    def select_old_folder(self):
+    def select_old_folder(self) -> None:
+        """
+        The function gets the path to the dataset to transform
+        """
         self.old_folderpath = (QFileDialog.getExistingDirectory(
             self, 'Select Folder')).replace('/', '\\')
         self.old_path_line_edit.setText(self.old_folderpath)
 
-    def select_new_folder(self):
+    def select_new_folder(self) -> None:
+        """
+        The function gets the path to the directory for creating a new dataset
+        """
         self.new_folderpath = (QFileDialog.getExistingDirectory(
             self, 'Select Folder')).replace('/', '\\')
         self.new_path_line_edit.setText(self.new_folderpath)
 
-    def create_csv(self):
+    def create_csv(self) -> None:
+        """
+        The function creates a csv annotation for the source dataset
+        """
         path = self.folderpath.split('\\')[-1]
         libs.task_1.make_csv(path)
 
-    def create_dataset2(self):
+    def create_dataset_2(self) -> None:
+        """
+        The function creates a csv annotation for a copy of the dataset
+        """
         old_path = self.old_folderpath.split('\\')[-1]
         new_path = self.new_folderpath.split('\\')[-1]
         print(old_path, new_path)
         libs.task_2.main(old_path, new_path)
 
-    def create_dataset_random(self):
+    def create_dataset_random(self) -> None:
+        """
+        The function creates a csv annotation for a copy of the dataset with random names
+        """
         old_path = self.old_folderpath.split('\\')[-1]
         new_path = self.new_folderpath.split('\\')[-1]
         print(old_path, new_path)
         libs.task_3.main(old_path, new_path)
 
-    def next_1(self):
-        try:
-            with open(next(self.iter1), 'r', encoding='utf-8') as file:
-                self.review.setText(''.join(file.readlines()))
-        except AttributeError:
-            print('Problem')
+    def next_1(self) -> None:
+        """ The function gets the file text from the iterator for class 1"""
+        with open(next(self.iter1), 'r', encoding='utf-8') as file:
+            self.review.setText(''.join(file.readlines()))
 
-    def next_2(self):
-        try:
-            with open(next(self.iter2), 'r', encoding='utf-8') as file:
-                self.review.setText(''.join(file.readlines()))
-        except AttributeError:
-            print('Problem')
+    def next_2(self) -> None:
+        """ The function gets the file text from the iterator for class 2"""
+        with open(next(self.iter2), 'r', encoding='utf-8') as file:
+            self.review.setText(''.join(file.readlines()))
 
-    def next_3(self):
-        try:
-            with open(next(self.iter3), 'r', encoding='utf-8') as file:
-                self.review.setText(''.join(file.readlines()))
-        except AttributeError:
-            print('Problem')
+    def next_3(self) -> None:
+        """ The function gets the file text from the iterator for class 3"""
+        with open(next(self.iter3), 'r', encoding='utf-8') as file:
+            self.review.setText(''.join(file.readlines()))
 
-    def next_4(self):
-        try:
-            with open(next(self.iter4), 'r', encoding='utf-8') as file:
-                self.review.setText(''.join(file.readlines()))
-        except AttributeError:
-            print('Problem')
+    def next_4(self) -> None:
+        """ The function gets the file text from the iterator for class 4"""
+        with open(next(self.iter4), 'r', encoding='utf-8') as file:
+            self.review.setText(''.join(file.readlines()))
 
-    def next_5(self):
-        try:
-            with open(next(self.iter5), 'r', encoding='utf-8') as file:
-                self.review.setText(''.join(file.readlines()))
-        except AttributeError:
-            print('Problem')
+    def next_5(self) -> None:
+        """ The function gets the file text from the iterator for class 5"""
+        with open(next(self.iter5), 'r', encoding='utf-8') as file:
+            self.review.setText(''.join(file.readlines()))
 
 
-def start():
+def start() -> None:
     app = QApplication(sys.argv)
     ex = Window()
     ex.show()

@@ -4,6 +4,9 @@ import shutil
 
 
 def rename(new_folder_name: str) -> None:
+    """
+    The function renames files and changes the hierarchy
+    """
     for i in range(1, 6):
         relative_path = os.path.relpath(f'{new_folder_name}')
         class_path = os.path.join(relative_path, str(i))
@@ -26,6 +29,9 @@ def rename(new_folder_name: str) -> None:
 
 
 def move_dataset(old_folder_name: str, new_folder_name: str) -> None:
+    """
+    The function copies files to a new directory
+    """
     old_path = os.path.relpath(f'{old_folder_name}')
     new_path = os.path.relpath(f'{new_folder_name}')
     if os.path.isdir(new_path):
@@ -34,6 +40,9 @@ def move_dataset(old_folder_name: str, new_folder_name: str) -> None:
 
 
 def new_make_csv(new_folder_name: str) -> None:
+    """
+    The function writes data to a csv file in the following format: absolute path, relative path, class label
+    """
     work_catalog = os.getcwd()
     os.chdir(new_folder_name)
     names = os.listdir()
