@@ -5,13 +5,32 @@ import libs.task_2
 import libs.task_3
 
 from PyQt5.QtWidgets import (QWidget, QLabel, QApplication, QPushButton, QToolTip,
-                             QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog)
+                             QVBoxLayout, QGridLayout, QScrollArea, QDialog, QLineEdit, QFileDialog, QMessageBox)
 from PyQt5.QtGui import (QFont, QIcon, QPixmap)
+
 from libs.task_5 import Iterator
 
 
+class MessageBox:
+    def __init__(self, parent: QWidget, text: str) -> None:
+        """constructor of MessageBox
+        Args:
+            parent (_type_): QWidget 
+            text (str): text to show
+        """
+        message_box = QMessageBox(parent)
+        message_box.setText(text)
+        ok_button = message_box.addButton(QMessageBox.Ok)
+        ok_button.setStyleSheet(
+            "background:#0e172c; border-radius: 5px; min-width: 100px;")
+        message_box.setStyleSheet('color: white')
+        message_box.exec_()
+
+
 class ScrollLabel(QScrollArea):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
+        """Constructor of ScrollLabel
+        """
         QScrollArea.__init__(self, *args, **kwargs)
         self.setWidgetResizable(True)
         text = QWidget(self)
@@ -23,23 +42,26 @@ class ScrollLabel(QScrollArea):
         self.label.setFont(QFont("SansSerif", 15))
 
     def setText(self, text: str) -> None:
-        """
-        The function sets the text field for the scrolllabel
+        """The function set text to ScrollLabel object
+
+        Args:
+            text (str): text to set
         """
         self.label.setText(text)
 
 
 class Window(QWidget):
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Constructor of main Window
+        """
         super().__init__()
         self.initUI()
         self.setStyleSheet(
             "background:#061E33; color: #C3D0DB; font-weight:bold; border-radius: 5px;")
 
     def initUI(self) -> None:
-        """
-        The function creates UI objects
+        """The function create an UI object of main Window
         """
         self.mode = 2
 
@@ -123,8 +145,7 @@ class Window(QWidget):
         self.show()
 
     def choice_1(self) -> None:
-        """
-        The function opens a dialog box for creating a csv file of the initial dataset
+        """The function show dialog window to make csv of initial dataset
         """
         dialog = QDialog(self)
         dialog.setWindowTitle('Create file CSV')
@@ -162,8 +183,7 @@ class Window(QWidget):
         dialog.exec_()
 
     def double_choice(self) -> None:
-        """
-        The function opens a dialog box for creating copies of the dataset and csv files for them
+        """The function show window to make copies of dataset
         """
         dialog = QDialog(self)
         dialog.setWindowTitle('Create file CSV')
@@ -291,31 +311,53 @@ class Window(QWidget):
 
     def next_1(self) -> None:
         """ The function gets the file text from the iterator for class 1"""
-        with open(next(self.iter1), 'r', encoding='utf-8') as file:
-            self.review.setText(''.join(file.readlines()))
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except StopIteration:
+            MessageBox(self, 'Class 1 is end')
+            self.iter1 = libs.task_5.Iterator(self.folderpath, '1')
 
     def next_2(self) -> None:
         """ The function gets the file text from the iterator for class 2"""
-        with open(next(self.iter2), 'r', encoding='utf-8') as file:
-            self.review.setText(''.join(file.readlines()))
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except StopIteration:
+            MessageBox(self, 'Class 2 is end')
+            self.iter1 = libs.task_5.Iterator(self.folderpath, '2')
 
     def next_3(self) -> None:
         """ The function gets the file text from the iterator for class 3"""
-        with open(next(self.iter3), 'r', encoding='utf-8') as file:
-            self.review.setText(''.join(file.readlines()))
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except StopIteration:
+            MessageBox(self, 'Class 3 is end')
+            self.iter1 = libs.task_5.Iterator(self.folderpath, '3')
 
     def next_4(self) -> None:
         """ The function gets the file text from the iterator for class 4"""
-        with open(next(self.iter4), 'r', encoding='utf-8') as file:
-            self.review.setText(''.join(file.readlines()))
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except StopIteration:
+            MessageBox(self, 'Class 4 is end')
+            self.iter1 = libs.task_5.Iterator(self.folderpath, '4')
 
     def next_5(self) -> None:
         """ The function gets the file text from the iterator for class 5"""
-        with open(next(self.iter5), 'r', encoding='utf-8') as file:
-            self.review.setText(''.join(file.readlines()))
+        try:
+            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+                self.review.setText(''.join(file.readlines()))
+        except StopIteration:
+            MessageBox(self, 'Class 5 is end')
+            self.iter1 = libs.task_5.Iterator(self.folderpath, '5')
 
 
 def start() -> None:
+    """The function makes a main Window and show it
+    """
     app = QApplication(sys.argv)
     ex = Window()
     ex.show()
