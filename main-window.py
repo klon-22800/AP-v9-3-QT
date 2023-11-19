@@ -321,38 +321,38 @@ class Window(QWidget):
     def next_2(self) -> None:
         """ The function gets the file text from the iterator for class 2"""
         try:
-            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+            with open(next(self.iter2), 'r', encoding='utf-8') as file:
                 self.review.setText(''.join(file.readlines()))
         except StopIteration:
             MessageBox(self, 'Class 2 is end')
-            self.iter1 = libs.task_5.Iterator(self.folderpath, '2')
+            self.iter2 = libs.task_5.Iterator(self.folderpath, '2')
 
     def next_3(self) -> None:
         """ The function gets the file text from the iterator for class 3"""
         try:
-            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+            with open(next(self.iter3), 'r', encoding='utf-8') as file:
                 self.review.setText(''.join(file.readlines()))
         except StopIteration:
             MessageBox(self, 'Class 3 is end')
-            self.iter1 = libs.task_5.Iterator(self.folderpath, '3')
+            self.iter3 = libs.task_5.Iterator(self.folderpath, '3')
 
     def next_4(self) -> None:
         """ The function gets the file text from the iterator for class 4"""
         try:
-            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+            with open(next(self.iter4), 'r', encoding='utf-8') as file:
                 self.review.setText(''.join(file.readlines()))
         except StopIteration:
             MessageBox(self, 'Class 4 is end')
-            self.iter1 = libs.task_5.Iterator(self.folderpath, '4')
+            self.iter4 = libs.task_5.Iterator(self.folderpath, '4')
 
     def next_5(self) -> None:
         """ The function gets the file text from the iterator for class 5"""
         try:
-            with open(next(self.iter1), 'r', encoding='utf-8') as file:
+            with open(next(self.iter5), 'r', encoding='utf-8') as file:
                 self.review.setText(''.join(file.readlines()))
         except StopIteration:
             MessageBox(self, 'Class 5 is end')
-            self.iter1 = libs.task_5.Iterator(self.folderpath, '5')
+            self.iter5 = libs.task_5.Iterator(self.folderpath, '5')
 
 
 def start() -> None:
